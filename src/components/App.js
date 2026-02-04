@@ -2,97 +2,48 @@ import React, { useState } from "react";
 import "./App.css";
 
 function App() {
-  const menuData = [
-    {
-      id: 1,
-      name: "Pancakes",
-      category: "Breakfast",
-      price: "₹150",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      id: 2,
-      name: "Omelette",
-      category: "Breakfast",
-      price: "₹120",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      id: 3,
-      name: "Veg Biryani",
-      category: "Lunch",
-      price: "₹200",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      id: 4,
-      name: "Fried Rice",
-      category: "Lunch",
-      price: "₹180",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      id: 5,
-      name: "Chocolate Shake",
-      category: "Shakes",
-      price: "₹100",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      id: 6,
-      name: "Strawberry Shake",
-      category: "Shakes",
-      price: "₹110",
-      image: "https://via.placeholder.com/150",
-    },
+  const data = [
+    { id: 1, name: "Pancakes", category: "Breakfast", price: "₹150" },
+    { id: 2, name: "Omelette", category: "Breakfast", price: "₹120" },
+    { id: 3, name: "Biryani", category: "Lunch", price: "₹200" },
+    { id: 4, name: "Fried Rice", category: "Lunch", price: "₹180" },
+    { id: 5, name: "Chocolate Shake", category: "Shakes", price: "₹100" },
+    { id: 6, name: "Strawberry Shake", category: "Shakes", price: "₹110" }
   ];
 
-  const [menuItems, setMenuItems] = useState(menuData);
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [menuItems, setMenuItems] = useState(data);
 
-  const filterItems = (category) => {
-    setActiveCategory(category);
-    const filtered = menuData.filter(
+  const filterCategory = (category) => {
+    const filteredItems = data.filter(
       (item) => item.category === category
     );
-    setMenuItems(filtered);
+    setMenuItems(filteredItems);
   };
 
   return (
     <div id="main">
       <h1>Menu</h1>
 
-      <div className="button-container">
-        <button
-          id="filter-btn-1"
-          onClick={() => filterItems("Breakfast")}
-        >
+      <div>
+        <button id="filter-btn-1" onClick={() => filterCategory("Breakfast")}>
           Breakfast
         </button>
 
-        <button
-          id="filter-btn-2"
-          onClick={() => filterItems("Lunch")}
-        >
+        <button id="filter-btn-2" onClick={() => filterCategory("Lunch")}>
           Lunch
         </button>
 
-        <button
-          id="filter-btn-3"
-          onClick={() => filterItems("Shakes")}
-        >
+        <button id="filter-btn-3" onClick={() => filterCategory("Shakes")}>
           Shakes
         </button>
       </div>
 
-      <div className="menu-container">
+      <div>
         {menuItems.map((item) => (
           <div
             key={item.id}
-            className="menu-item"
             data-test-id={`menu-item-${item.category.toLowerCase()}`}
           >
-            <img src={item.image} alt={item.name} />
             <h3>{item.name}</h3>
             <p>{item.price}</p>
           </div>
@@ -103,5 +54,3 @@ function App() {
 }
 
 export default App;
-
-
